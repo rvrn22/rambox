@@ -317,56 +317,6 @@ Ext.define('Rambox.view.main.Main', {
 					}
 				]
 			}
-			,bbar: [
-				{
-					 xtype: 'segmentedbutton'
-					,allowToggle: false
-					,items: [
-						{
-							 text: '<b>Help us</b> with'
-							,pressed: true
-						}
-						,{
-							 text: locale['app.main[25]']
-							,glyph: 'xf21e@FontAwesome'
-							,handler: 'showDonate'
-						}
-						,{
-							 text: 'Translation'
-							,glyph: 'xf0ac@FontAwesome'
-							,href: 'https://crowdin.com/project/rambox/invite'
-						}
-					]
-				}
-				,'->'
-				,{
-					 xtype: 'label'
-					,html: '<span class="fa fa-code" style="color:black;"></span> '+locale['app.main[26]']+' <span class="fa fa-heart" style="color:red;"></span> '+locale['app.main[27]'].replace('Argentina', '<img src="resources/flag.png" alt="Argentina" data-qtip="Argentina" />')
-				}
-				,'->'
-				,{
-					xtype: 'segmentedbutton'
-					,allowToggle: false
-					,items: [
-						{
-							 text: '<b>Follow us</b>'
-							,pressed: true
-						}
-						,{
-							 glyph: 'xf082@FontAwesome'
-							,href: 'https://www.facebook.com/ramboxapp'
-						}
-						,{
-							 glyph: 'xf099@FontAwesome'
-							,href: 'https://www.twitter.com/ramboxapp'
-						}
-						,{
-							 glyph: 'xf09b@FontAwesome'
-							,href: 'https://www.github.com/saenzramiro/rambox'
-						}
-					]
-				}
-			]
 		}
 		,{ id: 'tbfill', tabConfig : { xtype : 'tbfill' } }
 	]

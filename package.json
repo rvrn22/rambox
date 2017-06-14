@@ -11,7 +11,7 @@
 		"clean:osx": "rm -rf ./dist/Rambox-darwin-*",
 		"clean:win": "rm -rf ./dist/Rambox-win32-*",
 		"pack": "npm run pack:osx && npm run pack:win",
-		"pack:osx": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=darwin --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.icns --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
+		"pack:osx": "electron-packager \"./build/production/Rambox/\" \"WebApps\" --out=dist --platform=darwin --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.icns --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"ranjan.io\" --version-string.ProductName=\"WebApps\" --asar --prune --overwrite",
 		"pack:win": "npm run pack:win32 && npm run pack:win64",
 		"pack:win32": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=win32 --arch=ia32 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=32-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
 		"pack:win64": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=win32 --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",

@@ -433,7 +433,7 @@ if ( config.get('proxy') ) app.commandLine.appendSwitch('proxy-server', config.g
 // Disable GPU Acceleration for Linux
 // to prevent White Page bug
 // https://github.com/electron/electron/issues/6139
-// https://github.com/saenzramiro/webapps/issues/181
+// https://github.com/placeholder/webapps/issues/181
 if ( config.get('disable_gpu') ) app.disableHardwareAcceleration();
 
 // This method will be called when Electron has finished

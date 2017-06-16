@@ -7,10 +7,10 @@
 	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/saenzramiro/webapps.git"
+		"url": "https://github.com/placeholder/webapps.git"
 	},
 	"bugs": {
-		"url": "https://github.com/saenzramiro/webapps/issues"
+		"url": "https://github.com/placeholder/webapps/issues"
 	},
 	"homepage": "http://webapps.pro",
 	"keywords": [
@@ -26,7 +26,7 @@
 		"hangouts",
 		"skype"
 	],
-	"author": "Ramiro Saenz <saenzramiro@gmail.com>",
+	"author": "Ramiro Saenz <placeholder@gmail.com>",
 	"license": "GPL-3.0",
 	"dependencies": {
 		"auto-launch-patched": "5.0.2",

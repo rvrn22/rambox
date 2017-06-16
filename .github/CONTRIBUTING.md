@@ -8,19 +8,19 @@
 
 Help us to maximize the effort we can spend fixing issues and adding new features, by not reporting duplicate issues.
 
-[template]: https://github.com/saenzramiro/webapps/blob/master/.github/ISSUE_TEMPLATE.md
+[template]: https://github.com/placeholder/webapps/blob/master/.github/ISSUE_TEMPLATE.md
 
 ## Share your Custom Services
 
 If you consider there are other users that can use your Custom Service, we have a repo for this: [Webapps Services Contrib][webapps-services-contrib].
 
-[webapps-services-contrib]: https://github.com/saenzramiro/webapps-services-contrib
+[webapps-services-contrib]: https://github.com/placeholder/webapps-services-contrib
 
 ## Ask for help
 
 We have a great community in [Gitter][gitter] that can help you with any doubt or problem.
 
-[gitter]: https://gitter.im/saenzramiro/webapps
+[gitter]: https://gitter.im/placeholder/webapps
 
 ## Contributing to Source Code
 

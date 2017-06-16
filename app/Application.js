@@ -288,7 +288,7 @@ Ext.define('Webapps.Application', {
 							,{
 								 xtype: 'button'
 								,text: locale['app.update[1]']
-								,href: process.platform === 'darwin' ? 'https://getwebapps.herokuapp.com/download/'+process.platform+'_'+process.arch : 'https://github.com/saenzramiro/webapps/releases/latest'
+								,href: process.platform === 'darwin' ? 'https://getwebapps.herokuapp.com/download/'+process.platform+'_'+process.arch : 'https://github.com/placeholder/webapps/releases/latest'
 								,hidden: process.platform === 'win32'
 							}
 							,{
@@ -296,7 +296,7 @@ Ext.define('Webapps.Application', {
 								,text: locale['app.update[2]']
 								,ui: 'decline'
 								,tooltip: 'Click here to see more information about the new version.'
-								,href: 'https://github.com/saenzramiro/webapps/releases/tag/'+json.version
+								,href: 'https://github.com/placeholder/webapps/releases/tag/'+json.version
 							}
 							,'->'
 							,{

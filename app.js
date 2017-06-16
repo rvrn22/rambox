@@ -58,7 +58,7 @@ ipc.on('autoUpdater:update-downloaded', function(e, releaseNotes, releaseName, r
 				 xtype: 'button'
 				,text: 'Changelog'
 				,ui: 'decline'
-				,href: 'https://github.com/saenzramiro/webapps/releases/tag/'+releaseName
+				,href: 'https://github.com/placeholder/webapps/releases/tag/'+releaseName
 			}
 			,'->'
 			,{

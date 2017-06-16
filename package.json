@@ -32,7 +32,7 @@
 	},
 	"build": {
 		"productName": "Webapps",
-		"appId": "com.saenzramiro.webapps",
+		"appId": "com.placeholder.webapps",
 		"asar": true,
 		"mac": {
 			"category": "public.app-category.productivity",
@@ -58,7 +58,7 @@
 			]
 		},
 		"squirrelWindows": {
-			"iconUrl": "https://raw.githubusercontent.com/saenzramiro/webapps/master/resources/Icon.ico"
+			"iconUrl": "https://raw.githubusercontent.com/placeholder/webapps/master/resources/Icon.ico"
 		},
 		"win": {
 			"target": [

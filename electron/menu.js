@@ -26,24 +26,6 @@ module.exports = function(config) {
 			}
 		},
 		{
-			label: `&Facebook`,
-			click() {
-				shell.openExternal('https://www.facebook.com/webappsapp');
-			}
-		},
-		{
-			label: `&Twitter`,
-			click() {
-				shell.openExternal('https://www.twitter.com/webappsapp');
-			}
-		},
-		{
-			label: `&GitHub`,
-			click() {
-				shell.openExternal('https://www.github.com/saenzramiro/webapps');
-			}
-		},
-		{
 			type: 'separator'
 		},
 		{
@@ -60,13 +42,13 @@ module.exports = function(config) {
 	> Electron ${process.versions.electron}
 	> ${process.platform} ${process.arch} ${os.release()}`;
 
-				shell.openExternal(`https://github.com/saenzramiro/webapps/issues/new?body=${encodeURIComponent(body)}`);
+				shell.openExternal(`https://github.com/placeholder/webapps/issues/new?body=${encodeURIComponent(body)}`);
 			}
 		},
 		{
 			label: `&`+locale['menu.help[2]'],
 			click() {
-				shell.openExternal('https://gitter.im/saenzramiro/webapps');
+				shell.openExternal('https://gitter.im/placeholder/webapps');
 			}
 		},
 		{

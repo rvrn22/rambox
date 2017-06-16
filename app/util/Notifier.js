@@ -2,7 +2,7 @@
 /**
  * Singleton class for notification dispatching.
  */
-Ext.define('Rambox.util.Notifier', {
+Ext.define('Webapps.util.Notifier', {
 
 	singleton: true,
 

@@ -1,33 +1,31 @@
-var auth0, lock; // Auth0 vars
+var lock;
 // Enable Cookies
 var ElectronCookies = require('@exponent/electron-cookies');
-ElectronCookies.enable({ origin: 'http://rambox.pro' });
+ElectronCookies.enable({ origin: 'http://webapps.pro' });
 
 // Sencha App
 Ext.setGlyphFontFamily('FontAwesome');
 Ext.application({
-	 name: 'Rambox'
-
-	,extend: 'Rambox.Application'
-
-	,autoCreateViewport: 'Rambox.view.main.Main'
+	 name: 'Webapps'
+	,extend: 'Webapps.Application'
+	,autoCreateViewport: 'Webapps.view.main.Main'
 });
 
 // auto update logic
 const ipc = require('electron').ipcRenderer;
 ipc.on('showAbout', function(event, message) {
-	!Ext.cq1('about') ? Ext.create('Rambox.view.main.About') : '';
+	!Ext.cq1('about') ? Ext.create('Webapps.view.main.About') : '';
 });
 ipc.on('showPreferences', function(event, message) {
-	!Ext.cq1('preferences') ? Ext.create('Rambox.view.preferences.Preferences').show() : '';
+	!Ext.cq1('preferences') ? Ext.create('Webapps.view.preferences.Preferences').show() : '';
 });
 ipc.on('autoUpdater:check-update', function() {
-	Rambox.app.checkUpdate();
+	Webapps.app.checkUpdate();
 });
 ipc.on('autoUpdater:update-not-available', function() {
 	Ext.Msg.show({
 		 title: 'You are up to date!'
-		,message: 'You have the latest version of Rambox.'
+		,message: 'You have the latest version of Webapps.'
 		,icon: Ext.Msg.INFO
 		,buttons: Ext.Msg.OK
 	});
@@ -35,7 +33,7 @@ ipc.on('autoUpdater:update-not-available', function() {
 ipc.on('autoUpdater:update-available', function() {
 	Ext.Msg.show({
 		 title: 'New Version available!'
-		,message: 'Please wait until Rambox download the new version and ask you for install it.'
+		,message: 'Please wait until Webapps download the new version and ask you for install it.'
 		,icon: Ext.Msg.INFO
 		,buttons: Ext.Msg.OK
 	});
@@ -49,7 +47,7 @@ ipc.on('autoUpdater:update-downloaded', function(e, releaseNotes, releaseName, r
 			'->'
 			,{
 				 xtype: 'label'
-				,html: '<b>New version ready to install ('+releaseName+')!</b> It will be installed the next time Rambox is relaunched.'
+				,html: '<b>New version ready to install ('+releaseName+')!</b> It will be installed the next time Webapps is relaunched.'
 			}
 			,{
 				 xtype: 'button'
@@ -60,7 +58,7 @@ ipc.on('autoUpdater:update-downloaded', function(e, releaseNotes, releaseName, r
 				 xtype: 'button'
 				,text: 'Changelog'
 				,ui: 'decline'
-				,href: 'https://github.com/saenzramiro/rambox/releases/tag/'+releaseName
+				,href: 'https://github.com/saenzramiro/webapps/releases/tag/'+releaseName
 			}
 			,'->'
 			,{
@@ -125,7 +123,7 @@ ipc.on('setBadge', function(event, messageCount) {
 // Reload Current Service
 ipc.on('reloadCurrentService', function(e) {
 	var tab = Ext.cq1('app-main').getActiveTab();
-	if ( tab.id !== 'ramboxTab' ) tab.reloadService();
+	if ( tab.id !== 'webappsTab' ) tab.reloadService();
 });
 // Focus the current service when Alt + Tab or click in webviews textfields
 window.addEventListener('focus', function() {

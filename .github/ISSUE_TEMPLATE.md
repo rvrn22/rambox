@@ -18,7 +18,7 @@
 
 <!-- Complete your environment -->
 
-> Rambox: v0.X.X
+> Webapps: v0.X.X
 
 > OS: XXXX
 

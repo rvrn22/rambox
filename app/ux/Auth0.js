@@ -1,4 +1,4 @@
-Ext.define('Rambox.ux.Auth0', {
+Ext.define('Webapps.ux.Auth0', {
 	 singleton: true
 
 	// private
@@ -22,7 +22,7 @@ Ext.define('Rambox.ux.Auth0', {
 				,primaryColor: '#0675A0'
 			}
 			,languageDictionary: {
-				title: 'Rambox Account'
+				title: 'Webapps Account'
 			}
 			,popupOptions: {
 				nodeIntegration: 'no'
@@ -46,15 +46,6 @@ Ext.define('Rambox.ux.Auth0', {
 					return;
 				}
 
-				// Display a spinner while waiting
-				Ext.Msg.wait(locale['app.window[29]'], locale['app.window[28]']);
-
-				// Google Analytics Event
-				ga_storage._trackEvent('Users', 'loggedIn');
-
-				// Set cookies to help Tooltip.io messages segmentation
-				Ext.util.Cookies.set('auth0', true);
-
 				// User is logged in
 				// Save the profile and JWT.
 				localStorage.setItem('profile', JSON.stringify(profile));
@@ -63,7 +54,7 @@ Ext.define('Rambox.ux.Auth0', {
 
 				if ( !Ext.isEmpty(profile.user_metadata) && !Ext.isEmpty(profile.user_metadata.services) && !me.backupCurrent ) {
 					Ext.each(profile.user_metadata.services, function(s) {
-						var service = Ext.create('Rambox.model.Service', s);
+						var service = Ext.create('Webapps.model.Service', s);
 						service.save();
 						Ext.getStore('Services').add(service);
 					});
@@ -94,7 +85,7 @@ Ext.define('Rambox.ux.Auth0', {
 		});
 
 		Ext.Ajax.request({
-			 url: 'https://rambox.auth0.com/api/v2/users/'+Ext.decode(localStorage.getItem('profile')).user_id
+			 url: 'https://webapps.auth0.com/api/v2/users/'+Ext.decode(localStorage.getItem('profile')).user_id
 			,method: 'PATCH'
 			,headers: { authorization: "Bearer " + localStorage.getItem('id_token') }
 			,jsonData: { user_metadata: { services: services, services_lastupdate: lastupdate } }
@@ -148,7 +139,7 @@ Ext.define('Rambox.ux.Auth0', {
 			// First we remove all current services
 			Ext.cq1('app-main').getController().removeAllServices(false, function() {
 				Ext.each(profile.user_metadata.services, function(s) {
-					var service = Ext.create('Rambox.model.Service', s);
+					var service = Ext.create('Webapps.model.Service', s);
 					service.save();
 					Ext.getStore('Services').add(service);
 				});
@@ -202,7 +193,7 @@ Ext.define('Rambox.ux.Auth0', {
 		var me = this;
 
 		Ext.Ajax.request({
-			 url: 'https://rambox.auth0.com/delegation'
+			 url: 'https://webapps.auth0.com/delegation'
 			,method: 'POST'
 			,jsonData: {
 				 grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer'

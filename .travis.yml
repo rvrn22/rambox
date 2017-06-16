@@ -35,11 +35,11 @@ install:
   - git config --global core.autocrlf input
   - git reset --hard HEAD
   - npm run sencha:clean
-  - git clone https://github.com/saenzramiro/rambox-build.git $TRAVIS_BUILD_DIR/build/production/Rambox/
+  - git clone https://github.com/saenzramiro/webapps-build.git $TRAVIS_BUILD_DIR/build/production/Webapps/
   - npm install
   - npm uninstall electron-prebuilt
   - npm i electron@$ELECTRON
-  - npm --prefix $TRAVIS_BUILD_DIR/build/production/Rambox/ install $TRAVIS_BUILD_DIR/build/production/Rambox/
+  - npm --prefix $TRAVIS_BUILD_DIR/build/production/Webapps/ install $TRAVIS_BUILD_DIR/build/production/Webapps/
 script:
   - echo $TRAVIS_OS_NAME
   - node --version
@@ -63,14 +63,14 @@ deploy:
   overwrite: true
   prerelease: true
   on:
-    repo: saenzramiro/rambox
+    repo: saenzramiro/webapps
     tags: true
     all_branches: true
 
 notifications:
   email:
     recipients:
-      - rambox@protonmail.com
+      - webapps@protonmail.com
     on_success: always
     on_failure: always
   webhooks:

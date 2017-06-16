@@ -1,4 +1,4 @@
-Ext.define('Rambox.view.preferences.PreferencesController', {
+Ext.define('Webapps.view.preferences.PreferencesController', {
 	 extend: 'Ext.app.ViewController'
 	,alias: 'controller.preferences-preferences'
 
@@ -26,7 +26,7 @@ Ext.define('Rambox.view.preferences.PreferencesController', {
 			Ext.isEmpty(values.master_password1) === false &&
 			Ext.isEmpty(values.master_password2) === false) {
 
-			values.master_password = Rambox.util.MD5.encypt(values.master_password1);
+			values.master_password = Webapps.util.MD5.encypt(values.master_password1);
 			delete values.master_password1;
 			delete values.master_password2;
 		}
@@ -42,8 +42,7 @@ Ext.define('Rambox.view.preferences.PreferencesController', {
 		// Locale
 		if ( values.locale !== ipc.sendSync('getConfig').locale ) {
 			localStorage.setItem('locale', values.locale);
-			localStorage.setItem('locale-auth0', me.getView().down('form').down('combo[name="locale"]').getSelection().get('auth0'));
-			Ext.Msg.confirm('Action required', 'To change the language of Rambox, you need to reload the app. Do you want to do it now?', function(btnId) {
+			Ext.Msg.confirm('Action required', 'To change the language of Webapps, you need to reload the app. Do you want to do it now?', function(btnId) {
 				if ( btnId === 'yes' ) ipc.send('relaunchApp');
 			});
 		}

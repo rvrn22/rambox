@@ -4,20 +4,20 @@
 
 var chai = require('chai');
 var expect = chai.expect;
-var RamboxTestHelper = require('../../helpers/RamboxTestHelper');
+var WebappsTestHelper = require('../../helpers/WebappsTestHelper');
 
-describe('Rambox window', function() {
+describe('Webapps window', function() {
 
 	/**
-	 * The Rambox test helper does common stuff.
+	 * The Webapps test helper does common stuff.
 	 *
 	 * @type {module.exports}
 	 */
-	var ramboxTestHelper = new RamboxTestHelper();
+	var webappsTestHelper = new WebappsTestHelper();
 
-	it('should have "Rambox" in the title', function () {
-		return ramboxTestHelper.app.client.browserWindow.getTitle().then(function(title) {
-			expect(title).to.contain('Rambox');
+	it('should have "Webapps" in the title', function () {
+		return webappsTestHelper.app.client.browserWindow.getTitle().then(function(title) {
+			expect(title).to.contain('Webapps');
 			return Promise.resolve();
 		});
 	})

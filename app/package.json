@@ -1,20 +1,20 @@
 {
-	"name": "Rambox",
-	"productName": "Rambox",
+	"name": "Webapps",
+	"productName": "Webapps",
 	"version": "0.5.9",
-	"description": "Rambox",
+	"description": "Webapps",
 	"main": "electron/main.js",
 	"private": true,
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/saenzramiro/rambox.git"
+		"url": "https://github.com/saenzramiro/webapps.git"
 	},
 	"bugs": {
-		"url": "https://github.com/saenzramiro/rambox/issues"
+		"url": "https://github.com/saenzramiro/webapps/issues"
 	},
-	"homepage": "http://rambox.pro",
+	"homepage": "http://webapps.pro",
 	"keywords": [
-		"Rambox",
+		"Webapps",
 		"messaging",
 		"app",
 		"slack",

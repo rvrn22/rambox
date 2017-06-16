@@ -1,2 +1,2 @@
-Ext.namespace('Ext.theme.is')['rambox-default-theme'] = true;
-Ext.theme.name = 'rambox-default-theme';
+Ext.namespace('Ext.theme.is')['webapps-default-theme'] = true;
+Ext.theme.name = 'webapps-default-theme';

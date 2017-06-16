@@ -33,5 +33,5 @@ npm-debug.log
 # Vagrant
 /.vagrant
 env.js
-rambox_cfg.json
+webapps_cfg.json
 languages.js

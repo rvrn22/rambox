@@ -1,11 +1,11 @@
-Ext.define('Rambox.view.main.Main', {
+Ext.define('Webapps.view.main.Main', {
 	 extend: 'Ext.tab.Panel'
 	,requires: [
-		 'Rambox.view.main.MainController'
-		,'Rambox.view.main.MainModel'
-		,'Rambox.ux.WebView'
-		,'Rambox.ux.mixin.Badge'
-		,'Rambox.view.add.Add'
+		 'Webapps.view.main.MainController'
+		,'Webapps.view.main.MainModel'
+		,'Webapps.ux.WebView'
+		,'Webapps.ux.mixin.Badge'
+		,'Webapps.view.add.Add'
 		,'Ext.ux.TabReorderer'
 	]
 
@@ -28,7 +28,7 @@ Ext.define('Rambox.view.main.Main', {
 	,items: [
 		{
 			 icon: 'resources/IconTray@2x.png'
-			,id: 'ramboxTab'
+			,id: 'webappsTab'
 			,closable: false
 			,reorderable: false
 			,autoScroll: true
@@ -240,8 +240,8 @@ Ext.define('Rambox.view.main.Main', {
 						 glyph: 'xf023@FontAwesome'
 						,text: locale['app.main[19]']
 						,tooltip: locale['app.main[20]']+'<br/><b>'+locale['app.main[18]']+': F2</b>'
-						,handler: 'lockRambox'
-						,id: 'lockRamboxBtn'
+						,handler: 'lockWebapps'
+						,id: 'lockWebappsBtn'
 					}
 					,'->'
 					,{
@@ -272,24 +272,6 @@ Ext.define('Rambox.view.main.Main', {
 											html: '<b class="menu-title">Last Sync: {last_sync}</b>'
 										}
 									}
-									,{
-										 text: 'Backup'
-										,glyph: 'xf0ee@FontAwesome'
-										,scope: Rambox.ux.Auth0
-										,handler: Rambox.ux.Auth0.backupConfiguration
-									}
-									,{
-										 text: 'Restore'
-										,glyph: 'xf0ed@FontAwesome'
-										,scope: Rambox.ux.Auth0
-										,handler: Rambox.ux.Auth0.restoreConfiguration
-									}
-									,{
-										 text: 'Check for updated backup'
-										,glyph: 'xf021@FontAwesome'
-										,scope: Rambox.ux.Auth0
-										,handler: Rambox.ux.Auth0.checkConfiguration
-									}
 								]
 							}
 							,'-'
@@ -299,16 +281,6 @@ Ext.define('Rambox.view.main.Main', {
 								,handler: 'logout'
 							}
 						]
-					}
-					,{
-						 text: locale['app.main[22]']
-						,icon: 'resources/auth0.png'
-						,id: 'loginBtn'
-						,tooltip: locale['app.main[23]']+'<br /><br /><i>'+locale['app.main[24]']+' Auth0 (http://auth0.com)</i>'
-						,bind: {
-							hidden: '{username}'
-						}
-						,handler: 'login'
 					}
 					,{
 						 tooltip: locale['preferences[0]']

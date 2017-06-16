@@ -5,19 +5,19 @@
 		"start:debug": "electron electron/main.js --enable-logging",
 		"test": "./node_modules/.bin/mocha test/tests/**/*.spec.js",
 		"sencha:clean": "rm -rf ./build/production",
-		"sencha:compile": "sencha app build && cp app/package.json build/production/Rambox/ && npm --prefix ./build/production/Rambox/ install ./build/production/Rambox/",
-		"sencha:compile:build": "sencha app build && cp app/package.json build/production/Rambox/ && cp -R build/production/Rambox/* ../rambox-build",
+		"sencha:compile": "sencha app build && cp app/package.json build/production/Webapps/ && npm --prefix ./build/production/Webapps/ install ./build/production/Webapps/",
+		"sencha:compile:build": "sencha app build && cp app/package.json build/production/Webapps/ && cp -R build/production/Webapps/* ../webapps-build",
 		"clean": "rm -rf ./dist",
-		"clean:osx": "rm -rf ./dist/Rambox-darwin-*",
-		"clean:win": "rm -rf ./dist/Rambox-win32-*",
+		"clean:osx": "rm -rf ./dist/Webapps-darwin-*",
+		"clean:win": "rm -rf ./dist/Webapps-win32-*",
 		"pack": "npm run pack:osx && npm run pack:win",
-		"pack:osx": "electron-packager \"./build/production/Rambox/\" \"WebApps\" --out=dist --platform=darwin --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.icns --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"ranjan.io\" --version-string.ProductName=\"WebApps\" --asar --prune --overwrite",
+		"pack:osx": "electron-packager \"./build/production/Webapps/\" \"WebApps\" --out=dist --platform=darwin --arch=x64 --electron-version=1.6.11 --icon=resources/installer/Icon.icns --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"ranjan.io\" --version-string.ProductName=\"WebApps\" --asar --prune --overwrite",
 		"pack:win": "npm run pack:win32 && npm run pack:win64",
-		"pack:win32": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=win32 --arch=ia32 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=32-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
-		"pack:win64": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=win32 --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
+		"pack:win32": "electron-packager \"./build/production/Webapps/\" \"Webapps\" --out=dist --platform=win32 --arch=ia32 --version=1.6.11 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=32-bit --version-string.CompanyName=\"Webapps\" --version-string.ProductName=\"Webapps\" --asar --prune --overwrite",
+		"pack:win64": "electron-packager \"./build/production/Webapps/\" \"Webapps\" --out=dist --platform=win32 --arch=x64 --version=1.6.11 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Webapps\" --version-string.ProductName=\"Webapps\" --asar --prune --overwrite",
 		"pack:linux": "npm run pack:linux32 && npm run pack:linux64",
-		"pack:linux32": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=linux --arch=ia32 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
-		"pack:linux64": "electron-packager \"./build/production/Rambox/\" \"Rambox\" --out=dist --platform=linux --arch=x64 --version=1.3.4 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Rambox\" --version-string.ProductName=\"Rambox\" --asar --prune --overwrite",
+		"pack:linux32": "electron-packager \"./build/production/Webapps/\" \"Webapps\" --out=dist --platform=linux --arch=ia32 --version=1.6.11 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Webapps\" --version-string.ProductName=\"Webapps\" --asar --prune --overwrite",
+		"pack:linux64": "electron-packager \"./build/production/Webapps/\" \"Webapps\" --out=dist --platform=linux --arch=x64 --version=1.6.11 --icon=resources/installer/Icon.ico --app-version=0.2.0 --build-version=64-bit --version-string.CompanyName=\"Webapps\" --version-string.ProductName=\"Webapps\" --asar --prune --overwrite",
 		"build": "npm run build:linux && npm run build:osx && npm run build:win",
 		"build:osx": "build --macos",
 		"build:linux": "npm run build:linux32 && npm run build:linux64",
@@ -31,8 +31,8 @@
 		"all:linux": "npm run sencha:clean && npm run sencha:compile && npm run build:linux"
 	},
 	"build": {
-		"productName": "Rambox",
-		"appId": "com.saenzramiro.rambox",
+		"productName": "Webapps",
+		"appId": "com.saenzramiro.webapps",
 		"asar": true,
 		"mac": {
 			"category": "public.app-category.productivity",
@@ -41,7 +41,7 @@
 			]
 		},
 		"dmg": {
-			"title": "Rambox",
+			"title": "Webapps",
 			"iconSize": 128,
 			"contents": [
 				{
@@ -58,7 +58,7 @@
 			]
 		},
 		"squirrelWindows": {
-			"iconUrl": "https://raw.githubusercontent.com/saenzramiro/rambox/master/resources/Icon.ico"
+			"iconUrl": "https://raw.githubusercontent.com/saenzramiro/webapps/master/resources/Icon.ico"
 		},
 		"win": {
 			"target": [
@@ -84,27 +84,27 @@
 		"directories": {
 			"buildResources": "resources/installer/",
 			"output": "dist/",
-			"app": "build/production/Rambox/"
+			"app": "build/production/Webapps/"
 		}
 	},
 	"devDependencies": {
-		"asar": "^0.12.1",
+		"asar": "0.13.0",
 		"electron": "1.7.1",
-		"electron-builder": "^17.8.0",
-		"electron-builder-squirrel-windows": "15.0.0",
-		"electron-squirrel-startup": "^1.0.0",
-		"chai": "3.5.0",
-		"mocha": "3.2.0",
-		"spectron": "3.4.0",
+		"electron-builder": "18.6.2",
+		"electron-builder-squirrel-windows": "19.3.0",
+		"electron-squirrel-startup": "1.0.0",
+		"chai": "4.0.2",
+		"mocha": "3.4.2",
+		"spectron": "3.6.4",
 		"csvjson": "4.3.3",
 		"crowdin": "1.0.0"
 	},
 	"dependencies": {
 		"auto-launch-patched": "5.0.2",
-		"tmp": "0.0.28",
-		"mime": "^1.3.4",
-		"electron-is-dev": "^0.1.1",
-		"electron-config": "0.2.1",
+		"tmp": "0.0.31",
+		"mime": "1.6.11",
+		"electron-is-dev": "0.1.2",
+		"electron-config": "1.0.0",
 		"@exponent/electron-cookies": "2.0.0"
 	}
 }

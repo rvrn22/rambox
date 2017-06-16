@@ -1,14 +1,14 @@
 /**
  * Default config for all webviews created
  */
-Ext.define('Rambox.ux.WebView',{
+Ext.define('Webapps.ux.WebView',{
 	 extend: 'Ext.panel.Panel'
 	,xtype: 'webview'
 
 	,requires: [
-		 'Rambox.util.Format'
-		,'Rambox.util.Notifier'
-		,'Rambox.util.UnreadCounter'
+		 'Webapps.util.Format'
+		,'Webapps.util.Notifier'
+		,'Webapps.util.UnreadCounter'
 	]
 
 	// private
@@ -176,7 +176,7 @@ Ext.define('Rambox.ux.WebView',{
 					//,webpreferences: 'nodeIntegration=no'
 					//,disablewebsecurity: 'on' // Disabled because some services (Like Google Drive) dont work with this enabled
 					,useragent: Ext.getStore('ServicesList').getById(me.record.get('type')).get('userAgent')
-					,preload: './resources/js/rambox-service-api.js'
+					,preload: './resources/js/webapps-service-api.js'
 				}
 			}];
 
@@ -229,25 +229,22 @@ Ext.define('Rambox.ux.WebView',{
 
 		var webview = me.down('component').el.dom;
 
-		// Google Analytics Event
-		ga_storage._trackEvent('Services', 'load', me.type, 1, true);
-
 		// Notifications in Webview
 		me.setNotifications(localStorage.getItem('locked') || JSON.parse(localStorage.getItem('dontDisturb')) ? false : me.record.get('notifications'));
 
-		// Show and hide spinner when is loading
-		webview.addEventListener("did-start-loading", function() {
-			console.info('Start loading...', me.src);
-			if ( !me.down('statusbar').closed || !me.down('statusbar').keep ) me.down('statusbar').show();
-			me.down('statusbar').showBusy();
-		});
-		webview.addEventListener("did-stop-loading", function() {
-			me.down('statusbar').clearStatus({useDefaults: true});
-			if ( !me.down('statusbar').keep ) me.down('statusbar').hide();
-		});
+		// // Show and hide spinner when is loading
+		// webview.addEventListener("did-start-loading", function() {
+		// 	console.info('Start loading...', me.src);
+		// 	if ( !me.down('statusbar').closed || !me.down('statusbar').keep ) me.down('statusbar').show();
+		// 	me.down('statusbar').showBusy();
+		// });
+		// webview.addEventListener("did-stop-loading", function() {
+		// 	me.down('statusbar').clearStatus({useDefaults: true});
+		// 	if ( !me.down('statusbar').keep ) me.down('statusbar').hide();
+		// });
 
 		webview.addEventListener("did-finish-load", function(e) {
-			Rambox.app.setTotalServicesLoaded( Rambox.app.getTotalServicesLoaded() + 1 );
+			Webapps.app.setTotalServicesLoaded( Webapps.app.getTotalServicesLoaded() + 1 );
 
 			// Apply saved zoom level
 			webview.setZoomLevel(me.record.get('zoomLevel'));
@@ -395,19 +392,19 @@ Ext.define('Rambox.ux.WebView',{
 		webview.addEventListener('ipc-message', function(event) {
 			var channel = event.channel;
 			switch (channel) {
-				case 'rambox.setUnreadCount':
+				case 'webapps.setUnreadCount':
 					handleSetUnreadCount(event);
 					break;
-				case 'rambox.clearUnreadCount':
+				case 'webapps.clearUnreadCount':
 					handleClearUnreadCount(event);
 					break;
-				case 'rambox.showWindowAndActivateTab':
+				case 'webapps.showWindowAndActivateTab':
 					showWindowAndActivateTab(event);
 					break;
 			}
 
 			/**
-			 * Handles 'rambox.clearUnreadCount' messages.
+			 * Handles 'webapps.clearUnreadCount' messages.
 			 * Clears the unread count.
 			 */
 			function handleClearUnreadCount() {
@@ -417,7 +414,7 @@ Ext.define('Rambox.ux.WebView',{
 			}
 
 			/**
-			 * Handles 'rambox.setUnreadCount' messages.
+			 * Handles 'webapps.setUnreadCount' messages.
 			 * Sets the badge text if the event contains an integer as first argument.
 			 *
 			 * @param event
@@ -464,12 +461,12 @@ Ext.define('Rambox.ux.WebView',{
 		var me = this;
 
 		if ( !isNaN(newUnreadCount) && (function(x) { return (x | 0) === x; })(parseFloat(newUnreadCount)) && me.record.get('includeInGlobalUnreadCounter') === true) {
-			Rambox.util.UnreadCounter.setUnreadCountForService(me.record.get('id'), newUnreadCount);
+			Webapps.util.UnreadCounter.setUnreadCountForService(me.record.get('id'), newUnreadCount);
 		} else {
-			Rambox.util.UnreadCounter.clearUnreadCountForService(me.record.get('id'));
+			Webapps.util.UnreadCounter.clearUnreadCountForService(me.record.get('id'));
 		}
 
-		me.setTabBadgeText(Rambox.util.Format.formatNumber(newUnreadCount));
+		me.setTabBadgeText(Webapps.util.Format.formatNumber(newUnreadCount));
 
 		me.doManualNotification(parseInt(newUnreadCount));
 	}
@@ -480,7 +477,7 @@ Ext.define('Rambox.ux.WebView',{
 
 	/**
 	 * Dispatch manual notification if
-	 * • service doesn't have notifications, so Rambox does them
+	 * • service doesn't have notifications, so Webapps does them
 	 * • count increased
 	 * • not in dnd mode
 	 * • notifications enabled
@@ -494,7 +491,7 @@ Ext.define('Rambox.ux.WebView',{
 			me.currentUnreadCount < count &&
 			me.record.get('notifications') &&
 			!JSON.parse(localStorage.getItem('dontDisturb'))) {
-				Rambox.util.Notifier.dispatchNotification(me, count);
+				Webapps.util.Notifier.dispatchNotification(me, count);
 		}
 
 		me.currentUnreadCount = count;
@@ -522,7 +519,7 @@ Ext.define('Rambox.ux.WebView',{
 	,clearUnreadCounter: function() {
 		var me = this;
 		me.tab.setBadgeText('');
-		Rambox.util.UnreadCounter.clearUnreadCountForService(me.record.get('id'));
+		Webapps.util.UnreadCounter.clearUnreadCountForService(me.record.get('id'));
 	}
 
 	,reloadService: function(btn) {

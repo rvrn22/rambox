@@ -1,41 +1,41 @@
 /**
- * This file is loaded in the service web views to provide a Rambox API.
+ * This file is loaded in the service web views to provide a Webapps API.
  */
 
 const { ipcRenderer } = require('electron');
 
 /**
- * Make the Rambox API available via a global "rambox" variable.
+ * Make the Webapps API available via a global "webapps" variable.
  *
  * @type {{}}
  */
-window.rambox = {};
+window.webapps = {};
 
 /**
  * Sets the unraed count of the tab.
  *
  * @param {*} count	The unread count
  */
-window.rambox.setUnreadCount = function(count) {
-	ipcRenderer.sendToHost('rambox.setUnreadCount', count);
+window.webapps.setUnreadCount = function(count) {
+	ipcRenderer.sendToHost('webapps.setUnreadCount', count);
 };
 
 /**
  * Clears the unread count.
  */
-window.rambox.clearUnreadCount = function() {
-	ipcRenderer.sendToHost('rambox.clearUnreadCount');
+window.webapps.clearUnreadCount = function() {
+	ipcRenderer.sendToHost('webapps.clearUnreadCount');
 }
 
 /**
- * Override to add notification click event to display Rambox window and activate service tab
+ * Override to add notification click event to display Webapps window and activate service tab
  */
 var NativeNotification = Notification;
 Notification = function(title, options) {
 	var notification = new NativeNotification(title, options);
 
 	notification.addEventListener('click', function() {
-		ipcRenderer.sendToHost('rambox.showWindowAndActivateTab');
+		ipcRenderer.sendToHost('webapps.showWindowAndActivateTab');
 	});
 
 	return notification;

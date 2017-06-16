@@ -1,7 +1,7 @@
-# rambox-default-theme/sass
+# webapps-default-theme/sass
 
 This folder contains SASS files of various kinds, organized in sub-folders:
 
-    rambox-default-theme/sass/etc
-    rambox-default-theme/sass/src
-    rambox-default-theme/sass/var
+    webapps-default-theme/sass/etc
+    webapps-default-theme/sass/src
+    webapps-default-theme/sass/var

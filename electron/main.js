@@ -45,7 +45,7 @@ const appMenu = require('./menu')(config);
 
 // Configure AutoLaunch
 const appLauncher = new AutoLaunch({
-	 name: 'Rambox'
+	 name: 'Webapps'
 	,isHidden: config.get('start_minimized')
 });
 config.get('auto_launch') && !isDev ? appLauncher.enable() : appLauncher.disable();
@@ -141,7 +141,7 @@ function createWindow () {
 			 webSecurity: false
 			,nodeIntegration: true
 			,plugins: true
-			,partition: 'persist:rambox'
+			,partition: 'persist:webapps'
 		}
 	});
 
@@ -433,7 +433,7 @@ if ( config.get('proxy') ) app.commandLine.appendSwitch('proxy-server', config.g
 // Disable GPU Acceleration for Linux
 // to prevent White Page bug
 // https://github.com/electron/electron/issues/6139
-// https://github.com/saenzramiro/rambox/issues/181
+// https://github.com/saenzramiro/webapps/issues/181
 if ( config.get('disable_gpu') ) app.disableHardwareAcceleration();
 
 // This method will be called when Electron has finished

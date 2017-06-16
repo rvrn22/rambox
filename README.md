@@ -1,1 +1,1 @@
-A fork of rambox with some personalization. YMMV.
+A fork of webapps with some personalization. YMMV.

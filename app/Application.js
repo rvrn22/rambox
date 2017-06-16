@@ -1,11 +1,10 @@
-Ext.define('Rambox.Application', {
+Ext.define('Webapps.Application', {
 	 extend: 'Ext.app.Application'
 
-	,name: 'Rambox'
+	,name: 'Webapps'
 
 	,requires: [
-		 'Rambox.ux.Auth0'
-		,'Rambox.util.MD5'
+		,'Webapps.util.MD5'
 		,'Ext.window.Toast'
 		,'Ext.util.Cookies'
 	]
@@ -26,23 +25,12 @@ Ext.define('Rambox.Application', {
 	}
 
 	,launch: function () {
-		// Set Google Analytics events
-		ga_storage._setAccount('UA-80680424-1');
-		ga_storage._trackPageview('/index.html', 'main');
-		ga_storage._trackEvent('Versions', require('electron').remote.app.getVersion());
 
 		// Load language for Ext JS library
-		Ext.Loader.loadScript({url: Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", localStorage.getItem('locale-auth0') || 'en')});
-
-		// Initialize Auth0
-		Rambox.ux.Auth0.init();
-
-		// Set cookies to help Tooltip.io messages segmentation
-		Ext.util.Cookies.set('version', require('electron').remote.app.getVersion());
-		if ( Ext.util.Cookies.get('auth0') === null ) Ext.util.Cookies.set('auth0', false);
+		Ext.Loader.loadScript({url: Ext.util.Format.format("ext/packages/ext-locale/build/ext-locale-{0}.js", 'en')});
 
 		// Check for updates
-		if ( require('electron').remote.process.argv.indexOf('--without-update') === -1 && process.platform !== 'win32' ) Rambox.app.checkUpdate(true);
+		if ( require('electron').remote.process.argv.indexOf('--without-update') === -1 && process.platform !== 'win32' ) Webapps.app.checkUpdate(true);
 
 		// Add shortcuts to switch services using CTRL + Number
 		var map = new Ext.util.KeyMap({
@@ -173,8 +161,8 @@ Ext.define('Rambox.Application', {
 					,alt: false
 					,shift: false
 					,handler: function(key) {
-						var btn = Ext.getCmp('lockRamboxBtn');
-						Ext.cq1('app-main').getController().lockRambox(btn);
+						var btn = Ext.getCmp('lockWebappsBtn');
+						Ext.cq1('app-main').getController().lockWebapps(btn);
 					}
 				}
 			]
@@ -200,7 +188,7 @@ Ext.define('Rambox.Application', {
 		if ( localStorage.getItem('dontDisturb') === null ) localStorage.setItem('dontDisturb', false);
 
 		if ( localStorage.getItem('locked') ) {
-			console.info('Lock Rambox:', 'Enabled');
+			console.info('Lock Webapps:', 'Enabled');
 			Ext.cq1('app-main').getController().showLockWindow();
 		}
 
@@ -218,7 +206,7 @@ Ext.define('Rambox.Application', {
 				,items: [
 					{
 						 xtype: 'container'
-						,html: '<h1>Synchronization problem fixed!</h1>In previous version, we had a bug that backing up your services throw an error. Now is fixed, but you will need to follow two simple steps to make it work.<br><br>If you decide not to do it now, you can cancel but it will ask you again next time you open Rambox until you do it.'
+						,html: '<h1>Synchronization problem fixed!</h1>In previous version, we had a bug that backing up your services throw an error. Now is fixed, but you will need to follow two simple steps to make it work.<br><br>If you decide not to do it now, you can cancel but it will ask you again next time you open Webapps until you do it.'
 					}
 					,{
 						 xtype: 'container'
@@ -251,9 +239,6 @@ Ext.define('Rambox.Application', {
 						,itemId: 'signin'
  						,hidden: true
 						,handler: function(btn) {
-							Rambox.ux.Auth0.backupCurrent = true;
-							Rambox.ux.Auth0.login();
-							Ext.defer(Rambox.ux.Auth0.logout, 1000);
 							btn.hide();
 							btn.nextSibling('#sync').show();
 							win.getLayout().setActiveItem(2);
@@ -264,33 +249,26 @@ Ext.define('Rambox.Application', {
 						,itemId: 'sync'
 						,hidden: true
 						,handler: function() {
-							Rambox.ux.Auth0.backupConfiguration(function() {
-								win.close();
-								Rambox.ux.Auth0.backupCurrent = false;
-							});
 						}
 					}
 				]
 			});
 		}
-
-		// Remove spinner
-		Ext.get('spinner').destroy();
 	}
 
 	,updateTotalNotifications: function( newValue, oldValue ) {
 		newValue = parseInt(newValue);
 		if ( newValue > 0 )	{
-			document.title = 'Rambox (' + Rambox.util.Format.formatNumber(newValue) + ')';
+			document.title = 'Webapps (' + Webapps.util.Format.formatNumber(newValue) + ')';
 		} else {
-			document.title = 'Rambox';
+			document.title = 'Webapps';
 		}
 	}
 
 	,checkUpdate: function(silence) {
 		console.info('Checking for updates...');
 		Ext.Ajax.request({
-			 url: 'http://rambox.pro/api/latestversion.json'
+			 url: 'http://webapps.pro/api/latestversion.json'
 			,method: 'GET'
 			,success: function(response) {
 				var json = Ext.decode(response.responseText);
@@ -310,7 +288,7 @@ Ext.define('Rambox.Application', {
 							,{
 								 xtype: 'button'
 								,text: locale['app.update[1]']
-								,href: process.platform === 'darwin' ? 'https://getrambox.herokuapp.com/download/'+process.platform+'_'+process.arch : 'https://github.com/saenzramiro/rambox/releases/latest'
+								,href: process.platform === 'darwin' ? 'https://getwebapps.herokuapp.com/download/'+process.platform+'_'+process.arch : 'https://github.com/saenzramiro/webapps/releases/latest'
 								,hidden: process.platform === 'win32'
 							}
 							,{
@@ -318,7 +296,7 @@ Ext.define('Rambox.Application', {
 								,text: locale['app.update[2]']
 								,ui: 'decline'
 								,tooltip: 'Click here to see more information about the new version.'
-								,href: 'https://github.com/saenzramiro/rambox/releases/tag/'+json.version
+								,href: 'https://github.com/saenzramiro/webapps/releases/tag/'+json.version
 							}
 							,'->'
 							,{

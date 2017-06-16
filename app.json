@@ -2,7 +2,7 @@
     /**
      * The application's namespace.
      */
-    "name": "Rambox",
+    "name": "Webapps",
 
     /**
      * The relative path to the appliaction's markup file (html, jsp, asp, etc.)
@@ -28,7 +28,7 @@
      * The name of the theme for this application.
      */
 
-    "theme": "rambox-default-theme",
+    "theme": "webapps-default-theme",
 
     /**
      * The list of required packages (with optional versions; default is "latest").
@@ -49,13 +49,13 @@
     "sass": {
         /**
          * The root namespace to use when mapping *.scss files to classes in the
-         * sass/src and sass/var directories. For example, "Rambox.view.Foo" would
-         * map to "sass/src/view/Foo.scss". If we changed this to "Rambox.view" then
+         * sass/src and sass/var directories. For example, "Webapps.view.Foo" would
+         * map to "sass/src/view/Foo.scss". If we changed this to "Webapps.view" then
          * it would map to "sass/src/Foo.scss". To style classes outside the app's
          * root namespace, change this to "". Doing so would change the mapping of
-         * "Rambox.view.Foo" to "sass/src/Rambox/view/Foo.scss".
+         * "Webapps.view.Foo" to "sass/src/Webapps/view/Foo.scss".
          */
-        "namespace": "Rambox"
+        "namespace": "Webapps"
     },
 
     /**
@@ -102,10 +102,6 @@
     "js": [
 		{
             "path": "${framework.dir}/build/ext-all-rtl.js"
-        },
-        {
-            "path": "resources/js/auth0-7.1.0.min.js",
-			"remote": true
         },
 		{
             "path": "resources/js/lock-10.2.2/lock.min.js",
@@ -278,7 +274,7 @@
         "cache": [
             "index.html",
             "app.js",
-            "resources/Rambox-all.css",
+            "resources/Webapps-all.css",
             "resources/Icon.png"
         ],
         /**

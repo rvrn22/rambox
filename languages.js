@@ -19,7 +19,7 @@ var deleteFolderRecursive = function(path) {
 
 var crowdin = new Crowdin({
 	apiKey: '',
-	endpointUrl: 'https://api.crowdin.net/api/project/rambox'
+	endpointUrl: 'https://api.crowdin.net/api/project/webapps'
 });
 
 var args = process.argv.slice(2);

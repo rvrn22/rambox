@@ -1,10 +1,10 @@
-Ext.define('Rambox.view.preferences.Preferences',{
+Ext.define('Webapps.view.preferences.Preferences',{
 	 extend: 'Ext.window.Window'
 	,xtype: 'preferences'
 
 	,requires: [
-		 'Rambox.view.preferences.PreferencesController'
-		,'Rambox.view.preferences.PreferencesModel'
+		 'Webapps.view.preferences.PreferencesController'
+		,'Webapps.view.preferences.PreferencesModel'
 		,'Ext.form.field.ComboBox'
 		,'Ext.form.field.Checkbox'
 	]
@@ -85,7 +85,7 @@ Ext.define('Rambox.view.preferences.Preferences',{
 								 xtype: 'button'
 								,text: 'Help us Translate'
 								,style: 'border-top-left-radius:0;border-bottom-left-radius:0;'
-								,href: 'https://crowdin.com/project/rambox/invite'
+								,href: 'https://crowdin.com/project/webapps/invite'
 							}
 						]
 					}

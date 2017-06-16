@@ -13,7 +13,7 @@ Structure of a service entry:
 |type|Defines the type of the service. Must be one of `email` or `messaging`.|yes|
 |allow_popups|Set to `true` to allow popup windows for the service.|no|
 |note|Additional info to display when adding the service.|no|
-|manual_notifications|Set to `true` to let Rambox trigger notifications. Can be used for services that doesn't support browser notifications.|no|
+|manual_notifications|Set to `true` to let Webapps trigger notifications. Can be used for services that doesn't support browser notifications.|no|
 |js_unread|JavaScript code for setting the unread count (see below).|no|
 |dont_update_unread_from_title|Set to `true` to prevent updating the unread count from the window title (see below).|no|
 
@@ -25,4 +25,4 @@ First set `dont_update_unread_from_title` in the service config to `true`.
 
 Code provided by `js_unread` will be injected into the service website.
 You can retrieve the unread count in this JavaScript code e.g. by parsing elements.
-Set the unread count by calling `rambox.setUnreadCount(COUNT)` or clear it by calling `rambox.clearUnreadCount()`. 
+Set the unread count by calling `webapps.setUnreadCount(COUNT)` or clear it by calling `webapps.clearUnreadCount()`. 

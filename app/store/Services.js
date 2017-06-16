@@ -1,4 +1,4 @@
-Ext.define('Rambox.store.Services', {
+Ext.define('Webapps.store.Services', {
 	 extend: 'Ext.data.Store'
 	,alias: 'store.services'
 
@@ -6,7 +6,7 @@ Ext.define('Rambox.store.Services', {
 		'Ext.data.proxy.LocalStorage'
 	]
 
-	,model: 'Rambox.model.Service'
+	,model: 'Webapps.model.Service'
 
 	,autoLoad: true
 	,autoSync: true

@@ -1,4 +1,4 @@
-Ext.define('Rambox.view.main.MainController', {
+Ext.define('Webapps.view.main.MainController', {
 	 extend: 'Ext.app.ViewController'
 
 	,alias: 'controller.main'
@@ -7,24 +7,21 @@ Ext.define('Rambox.view.main.MainController', {
 	,onTabChange: function( tabPanel, newTab, oldTab ) {
 		var me = this;
 
-		// Set Google Analytics event
-		ga_storage._trackPageview('/index.html', 'main');
-
-		if ( newTab.id === 'ramboxTab' || !newTab.record.get('enabled') ) return;
+		if ( newTab.id === 'webappsTab' || !newTab.record.get('enabled') ) return;
 
 		var webview = newTab.down('component').el.dom;
 		if ( webview ) webview.focus();
 	}
 
 	,updatePositions: function(tabPanel, tab) {
-		if ( tab.id === 'ramboxTab' || tab.id === 'tbfill' ) return true;
+		if ( tab.id === 'webappsTab' || tab.id === 'tbfill' ) return true;
 
 		console.log('Updating Tabs positions...');
 
 		var store = Ext.getStore('Services');
 		store.suspendEvent('remove');
 		Ext.each(tabPanel.items.items, function(t, i) {
-			if ( t.id !== 'ramboxTab' && t.id !== 'tbfill' && t.record.get('enabled') ) {
+			if ( t.id !== 'webappsTab' && t.id !== 'tbfill' && t.record.get('enabled') ) {
 				var rec = store.getById(t.record.get('id'));
 				if ( rec.get('align') === 'right' ) i--;
 				rec.set('position', i);
@@ -77,7 +74,7 @@ Ext.define('Rambox.view.main.MainController', {
 	}
 
 	,onNewServiceSelect: function( view, record, item, index, e ) {
-		Ext.create('Rambox.view.add.Add', {
+		Ext.create('Webapps.view.add.Add', {
 			record: record
 		});
 	}
@@ -115,7 +112,7 @@ Ext.define('Rambox.view.main.MainController', {
 		var me = this;
 
 		// Clear counter for unread messaging
-		document.title = 'Rambox';
+		document.title = 'Webapps';
 
 		if ( btn ) {
 			Ext.Msg.confirm(locale['app.window[12]'], locale['app.window[14]'], function(btnId) {
@@ -127,7 +124,7 @@ Ext.define('Rambox.view.main.MainController', {
 					});
 					if ( Ext.isFunction(callback) ) callback();
 					Ext.cq1('app-main').resumeEvent('remove');
-					document.title = 'Rambox';
+					document.title = 'Webapps';
 				}
 			});
 		} else {
@@ -138,12 +135,12 @@ Ext.define('Rambox.view.main.MainController', {
 			});
 			if ( Ext.isFunction(callback) ) callback();
 			Ext.cq1('app-main').resumeEvent('remove');
-			document.title = 'Rambox';
+			document.title = 'Webapps';
 		}
 	}
 
 	,configureService: function( gridView, rowIndex, colIndex, col, e, rec, rowEl ) {
-		Ext.create('Rambox.view.add.Add', {
+		Ext.create('Webapps.view.add.Add', {
 			 record: rec
 			,service: Ext.getStore('ServicesList').getById(rec.get('type'))
 			,edit: true
@@ -211,9 +208,6 @@ Ext.define('Rambox.view.main.MainController', {
 	,dontDisturb: function(btn, e, called) {
 		console.info('Dont Disturb:', btn.pressed ? 'Enabled' : 'Disabled');
 
-		// Google Analytics Event
-		if ( !called ) ga_storage._trackEvent('Usability', 'dontDisturb', ( btn.pressed ? 'on' : 'off' ));
-
 		Ext.Array.each(Ext.getStore('Services').collect('id'), function(serviceId) {
 			// Get Tab
 			var tab = Ext.getCmp('tab_'+serviceId);
@@ -240,7 +234,7 @@ Ext.define('Rambox.view.main.MainController', {
 		});
 	}
 
-	,lockRambox: function(btn) {
+	,lockWebapps: function(btn) {
 		var me = this;
 
 		if ( ipc.sendSync('getConfig').master_password ) {
@@ -266,12 +260,12 @@ Ext.define('Rambox.view.main.MainController', {
 									,message: locale['app.window[25]']
 									,icon: Ext.Msg.WARNING
 									,buttons: Ext.Msg.OK
-									,fn: me.lockRambox
+									,fn: me.lockWebapps
 								});
 								return false;
 							}
 
-							setLock(Rambox.util.MD5.encypt(text));
+							setLock(Webapps.util.MD5.encypt(text));
 						}
 					});
 					msgbox2.textField.inputEl.dom.type = 'password';
@@ -281,13 +275,10 @@ Ext.define('Rambox.view.main.MainController', {
 		}
 
 		function setLock(text) {
-			console.info('Lock Rambox:', 'Enabled');
+			console.info('Lock Webapps:', 'Enabled');
 
 			// Save encrypted password in localStorage to show locked when app is reopen
 			localStorage.setItem('locked', text);
-
-			// Google Analytics Event
-			ga_storage._trackEvent('Usability', 'locked');
 
 			me.lookupReference('disturbBtn').setPressed(true);
 			me.dontDisturb(me.lookupReference('disturbBtn'), false, true);
@@ -300,8 +291,8 @@ Ext.define('Rambox.view.main.MainController', {
 		var me = this;
 
 		var validateFn = function() {
-			if ( localStorage.getItem('locked') === Rambox.util.MD5.encypt(winLock.down('textfield').getValue()) ) {
-				console.info('Lock Rambox:', 'Disabled');
+			if ( localStorage.getItem('locked') === Webapps.util.MD5.encypt(winLock.down('textfield').getValue()) ) {
+				console.info('Lock Webapps:', 'Disabled');
 				localStorage.removeItem('locked');
 				winLock.close();
 				me.lookupReference('disturbBtn').setPressed(false);
@@ -371,49 +362,6 @@ Ext.define('Rambox.view.main.MainController', {
 	,openPreferences: function( btn ) {
 		var me = this;
 
-		Ext.create('Rambox.view.preferences.Preferences').show();
-	}
-
-	,login: function(btn) {
-		var me = this;
-
-		Rambox.ux.Auth0.login();
-	}
-
-	,logout: function(btn) {
-		var me = this;
-
-		var logoutFn = function(callback) {
-			Ext.Msg.wait(locale['app.window[37]'], locale['app.main[21]']);
-
-			// Google Analytics Event
-			ga_storage._trackEvent('Users', 'loggedOut');
-
-			// Logout from Auth0
-			Rambox.ux.Auth0.logout();
-
-			Ext.cq1('app-main').getViewModel().set('username', '');
-			Ext.cq1('app-main').getViewModel().set('avatar', '');
-
-			if ( Ext.isFunction(callback) ) callback();
-
-			Ext.Msg.hide();
-		}
-
-		if ( btn ) {
-			Ext.Msg.confirm(locale['app.main[21]'], locale['app.window[38]'], function(btnId) {
-				if ( btnId === 'yes' ) {
-					logoutFn(function() {
-						me.removeAllServices();
-					});
-				}
-			});
-		} else {
-			logoutFn();
-		}
-	}
-
-	,showDonate: function( btn ) {
-		Tooltip.API.show('zxzKWZfcmgRtHXgth');
+		Ext.create('Webapps.view.preferences.Preferences').show();
 	}
 });
